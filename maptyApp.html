@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main{
+            top:300px;
+            position: relative;
+        }
+        .hidden{
+            display: none;
+        }.main_form {
+                     height: 100px;
+                 }
+         .form__row--hidden{
+             display: none;
+
+         }
+
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+          integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+            integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+            crossorigin=""></script>
+
+    <script defer src="maptyApp.js"></script>
+
+</head>
+<body>
+<div>
+    <form class="form  hidden">
+        <div class="form__row">
+            <div>
+                <input class="form__input_distance" placeholder="km">
+            </div>
+            <div class="form_row">
+                <select class="form__input form__input--type">
+                    <option value="running">Running</option>
+                    <option value="cycling">Cycling</option>
+                </select>
+            </div>
+            <div class="form__row form__row--hidden">
+                <label>Elev Gain</label>
+                <input class="form__input form__input--elevation" placeholder="meters">
+            </div>
+            <div class="form__row ">
+                <label>Cadence</label>
+                <input class="form__input form__input--cadence" placeholder="step/min">
+            </div>
+            <div class="form__row">
+                <label class="form__label">Duration</label>
+                <input
+                        class="form__input form__input--duration"
+                        placeholder="min"
+                />
+            </div>
+            <button class="form__btn">OK</button>
+
+        </div>
+
+
+    </form>
+</div>
+
+<div id="map" style="height: 400px" }
+>
+</div>
+</body>
+</html>
