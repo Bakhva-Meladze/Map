@@ -4,7 +4,7 @@ const inputType = document.querySelector('.form__input--type');
 const inputElevation = document.querySelector('.form__input--elevation');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputDuration = document.querySelector('.form__input--duration');
-
+const mainDiv = document.querySelector('.visible');
 
 class Workout {
     date = new Date();
@@ -77,9 +77,13 @@ class App {
             navigator.geolocation.getCurrentPosition(
                 this._loadMap.bind(this),
                 function () {
-                    alert('Could not get your position');
+                    mainDiv.style.backgroundColor ="red";
+                    mainDiv.style.color="black";
+                    mainDiv.style.textAlign ="center";
+                    mainDiv.innerHTML = `<h1>Warning, you need access your Location!!!</h1>`;
                 }
             );
+
     }
 
     _loadMap(position) {
