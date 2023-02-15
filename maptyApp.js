@@ -81,7 +81,7 @@ class App {
                     mainDiv.style.backgroundColor ="red";
                     mainDiv.style.color="black";
                     mainDiv.style.textAlign ="center";
-                    mainDiv.innerHTML = `<h1>Warning, you need access your Location!!!</h1>`;
+                    mainDiv.innerHTML = `<h1>Warning, you need access to your Location !!!</h1>`;
                 }
             );
 
