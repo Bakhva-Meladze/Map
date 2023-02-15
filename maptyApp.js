@@ -77,6 +77,7 @@ class App {
             navigator.geolocation.getCurrentPosition(
                 this._loadMap.bind(this),
                 function () {
+
                     mainDiv.style.backgroundColor ="red";
                     mainDiv.style.color="black";
                     mainDiv.style.textAlign ="center";
