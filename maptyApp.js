@@ -6,9 +6,11 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputDuration = document.querySelector('.form__input--duration');
 const mainDiv = document.querySelector('.visible');
 
+console.log(L);
 class Workout {
     date = new Date();
     id = (Date.now() + '').slice(-10);
+
 
     constructor(coords,distance,duration) {
         this.coords = coords;
@@ -52,14 +54,13 @@ class Cycling extends Workout {
         this.speed = this.distance /(this.duration /60);
         return this.speed;
     }
-
-
 }
 class App {
     #map;
     #mapZoomLevel = 13;
     #mapEvent;
     #workouts = [];
+
 
     constructor() {
         // Get user's position
@@ -71,13 +72,13 @@ class App {
         // Attach event handlers
         form.addEventListener('submit', this._newWorkout.bind(this));
         inputType.addEventListener('change', this._toggleElevationField);
+        console.log(navigator.geolocation);
      }
     _getPosition() {
         if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(
                 this._loadMap.bind(this),
                 function () {
-
                     mainDiv.style.backgroundColor ="red";
                     mainDiv.style.color="black";
                     mainDiv.style.textAlign ="center";
@@ -91,18 +92,29 @@ class App {
         const { latitude } = position.coords;
         const { longitude } = position.coords;
         // console.log(`https://www.google.pt/maps/@${latitude},${longitude}`);
+        console.log(latitude,longitude)
 
         const coords = [latitude, longitude];
 
         this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
-
         L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
             attribution:
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(this.#map);
 
+
+
         // Handling clicks on map
         this.#map.on('click', this._showForm.bind(this));
+        var circles=L.circle([latitude,longitude], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 200
+        }).addTo(this.#map);
+        circles.bindPopup("This is my location.").addTo(this.#map);
+        console.log(circles);
+
 
         this.#workouts.forEach(work => {
             this._renderWorkoutMarker(work);
@@ -110,7 +122,6 @@ class App {
     }
 
     _showForm(mapE) {
-        console.log(mapE);
         this.#mapEvent = mapE;
         form.classList.remove('hidden');
         inputDistance.focus();
